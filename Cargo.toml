@@ -1,0 +1,23 @@
+[package]
+name = "cfgv"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Validate configuration and produce human readable error messages"
+license = "MIT"
+repository = "https://github.com/grok-rs/cfgv-rs"
+keywords = ["configuration", "validation", "schema", "config"]
+categories = ["config", "development-tools"]
+
+[dependencies]
+indexmap = "2"
+regex = "1"
+serde_json = { version = "1", optional = true }
+
+[dev-dependencies]
+serde_json = "1"
+tempfile = "3"
+
+[features]
+default = []
+serde_json = ["dep:serde_json"]
