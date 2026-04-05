@@ -270,6 +270,37 @@ impl From<serde_json::Value> for Value {
     }
 }
 
+#[cfg(feature = "yaml_serde")]
+impl From<yaml_serde::Value> for Value {
+    fn from(v: yaml_serde::Value) -> Self {
+        match v {
+            yaml_serde::Value::Null => Value::Null,
+            yaml_serde::Value::Bool(b) => Value::Bool(b),
+            yaml_serde::Value::Number(n) => {
+                if let Some(i) = n.as_i64() {
+                    Value::Int(i)
+                } else if let Some(f) = n.as_f64() {
+                    Value::Float(f)
+                } else {
+                    Value::String(n.to_string())
+                }
+            }
+            yaml_serde::Value::String(s) => Value::String(s),
+            yaml_serde::Value::Sequence(arr) => {
+                Value::List(arr.into_iter().map(Value::from).collect())
+            }
+            yaml_serde::Value::Mapping(map) => {
+                let m: IndexMap<Value, Value> = map
+                    .into_iter()
+                    .map(|(k, v)| (Value::from(k), Value::from(v)))
+                    .collect();
+                Value::Map(m)
+            }
+            yaml_serde::Value::Tagged(tagged) => Value::from(tagged.value),
+        }
+    }
+}
+
 /// Helper macro to build a `Value::Map` from key-value pairs.
 ///
 /// # Example
