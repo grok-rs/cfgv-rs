@@ -1,5 +1,10 @@
 # cfgv
 
+[![CI](https://github.com/grok-rs/cfgv-rs/actions/workflows/ci.yml/badge.svg)](https://github.com/grok-rs/cfgv-rs/actions/workflows/ci.yml)
+[![crates.io](https://img.shields.io/crates/v/cfgv.svg)](https://crates.io/crates/cfgv)
+[![docs.rs](https://docs.rs/cfgv/badge.svg)](https://docs.rs/cfgv)
+[![License: MIT](https://img.shields.io/crates/l/cfgv.svg)](LICENSE)
+
 Validate configuration and produce human readable error messages.
 
 A Rust port of the Python [cfgv](https://github.com/asottile/cfgv) library.
